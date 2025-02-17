@@ -1,0 +1,153 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <link rel="shortcut icon" href="{% static 'images/logo.png' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="navbar">
+            <a href="{% url 'student_dashboard' %}" class="active">
+                <span class="material-icons-sharp">home</span>
+                <h3>Asosiy</h3>
+            </a>
+            <a href="{%url 'student_attendance'%}" onclick="timeTableAll()">
+                <span class="material-icons-sharp">today</span>
+                <h3>Davomat</h3>
+            </a> 
+            <!-- <a href="">
+                <span class="material-icons-sharp">password</span>
+                <h3>Change Password</h3>
+            </a> -->
+            <a href="{% url 'logout' %}">
+                <span class="material-icons-sharp">logout</span>
+                <h3>Chiqish</h3>
+            </a>
+        </div>
+        <div id="profile-btn">
+            <span class="material-icons-sharp">person</span>
+        </div>
+        <div class="theme-toggler">
+            <span class="material-icons-sharp active">light_mode</span>
+            <span class="material-icons-sharp">dark_mode</span>
+        </div>
+    </header>
+
+    <!-- Container -->
+    <div class="container">
+        <!-- Sidebar -->
+        <aside>
+            <div class="profile">
+                <div class="top">
+                    <div class="profile-photo">
+                        {% if student.image %}
+                            <img style="height: 100%; width: 100%;" src="{{ student.image.url }}" alt="Profile Photo">
+                        {% else %}
+                            <img src="{% static 'images/default_profile.jpg' %}" alt="Default Profile Photo">
+                        {% endif %}
+                    </div>
+                    <div class="info">
+                        <p>Ism sharif: <b>{{ student.name }}</b></p>
+                    </div>
+                </div>
+                <div class="about">
+                    <h5>Guruh</h5>
+                    <p>{{ student.student_class }}</p>
+                    <h5>Email</h5>
+                    <p>{{ student.email }}</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main>
+            <div class="subjects">
+                <div class="attendance-summary">
+                    <span class="material-icons-sharp" style="color: green;">done</span>
+                    <h3>Umumiy qatnashgan</h3>
+                    <h2>{{ total_present }}</h2>
+                </div>
+                <div class="attendance-summary">
+                    <span class="material-icons-sharp" style="color: red;">block</span>
+                    <h3>Umumiy qatnashmagan</h3>
+                    <h2>{{ total_absent }}</h2>
+                </div>
+            </div>
+            
+
+          <!-- Attendance Records Table -->
+<div class="timetable" id="timetable">
+    <div>
+        <h2>Recent Attendance</h2>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Sana</th>
+                <th>Status</th>
+                <th>Kirish vaqti</th>
+                <th>Chiqish vaqti</th>
+                <th>Oraliq</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in attendance_records %}
+            <tr>
+                <td>{{ record.date }}</td>
+                <td>{{ record.status }}</td>
+                <td>
+                    {% if record.check_in_time %}
+                        {{ record.check_in_time|date:"h:i:s A" }}
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+                <td>
+                    {% if record.check_out_time %}
+                        {{ record.check_out_time|date:"h:i:s A" }}
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+                <td>
+                    {% if record.check_in_time and record.check_out_time %}
+                        {{ record.calculate_duration }}
+                    {% else %}
+                        Not Checked Out
+                    {% endif %}
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">No attendance records found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+        
+        </main>
+
+       
+    </div>
+
+    <!-- Footer -->
+    <!-- <footer>
+        <p>Developed by ApyCoder | <a href="https://apycoder.com">Visit our website</a></p>
+    </footer> -->
+
+    <!-- JavaScript -->
+    
+    <script src="{% static 'app.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered Attendance System</title>
+    <!-- Include Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <h2>AI Dashboard</h2>
+        {% if user.is_authenticated %}
+            <a href="{% url 'register_student' %}"><i class="fas fa-user-plus"></i> Ro'yxatdan o'tqazish</a>
+            <a href="{% url 'student-list' %}"><i class="fas fa-users"></i> Talabani boshqarish</a>
+            <a href="{% url 'mark_attendance' %}"><i class="fas fa-check-circle"></i> Davomat olish</a>
+            <a href="{% url 'student_attendance_list' %}"><i class="fas fa-calendar-check"></i> Davomat ma'lumotlari</a>
+            <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Chiqish</a>
+        {% else %}
+            <a href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i> Kirish</a>
+        {% endif %}
+    </div>
+    
+
+    <!-- Modern Toggle Button -->
+    <button class="toggle-btn" id="toggle-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+  <!-- Main Content -->
+<div class="main-content" id="main-content">
+    <div class="hero-section">
+        <img style="border-radius: 50%;" src="./../../static/images/tiiame.png" alt="">
+
+        <h1>"TIIAME" NRU Attendance system</h1>
+        <!-- <p>Welcome, {{ user.username }}!</p> -->
+        
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="message {% if message.tags %}{{ message.tags }}{% endif %}">
+                        <strong>{{ message.level_tag|capfirst }}:</strong> {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        
+        <div class="buttons">
+            <div class="card">
+                <i class="fas fa-users"></i>
+                <p>Umumy talabalar: {{ total_students }}</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-calendar-check"></i>
+                <p>Davomat olinganlar: {{ total_attendance }}</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-check" style="color: green;"></i>
+                <p>Qatnashganlar: {{ total_present }}</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-times" style="color: red;"></i>
+                <p>Qatnashmagan: {{ total_absent }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <!-- Footer -->
+    <footer>
+        <p>Developed by Azizbek Gulomov <a href="https://a-gulomov.uz"></a></p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        const toggleBtn = document.getElementById('toggle-btn');
+        const sidebar = document.getElementById('sidebar');
+        const mainContent = document.getElementById('main-content');
+
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+            mainContent.classList.toggle('shift');
+        });
+
+        // Close sidebar on outside click for mobile
+        document.addEventListener('click', (e) => {
+            if (!sidebar.contains(e.target) && !toggleBtn.contains(e.target)) {
+                sidebar.classList.remove('open');
+                mainContent.classList.remove('shift');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -100,26 +100,26 @@
                 <img src="{{ student.image.url }}" alt="{{ student.name }}">
             </div>
             <div class="detail">
-                <strong>Name:</strong> {{ student.name }}
+                <strong>Ism sharif:</strong> {{ student.name }}
             </div>
             <div class="detail">
                 <strong>Email:</strong> {{ student.email }}
             </div>
             <div class="detail">
-                <strong>Class:</strong> {{ student.student_class }}
+                <strong>Guruh:</strong> {{ student.student_class }}
             </div>
             <div class="detail">
-                <strong>Joining Date:</strong> {{ student.joining_date|date:"d M Y" }}
+                <strong>Kirish sanasi:</strong> {{ student.joining_date|date:"d M Y" }}
             </div>
             <div class="detail">
-                <strong>Authorized:</strong> {% if student.authorized %} Yes {% else %} No {% endif %}
+                <strong>Ruxsat berilgan:</strong> {% if student.authorized %} Yes {% else %} No {% endif %}
             </div>
         </div>
         <div class="actions">
-            <a href="{% url 'student-list' %}">Back to List</a>
-            <a href="{% url 'student-authorize' pk=student.pk %}">Authorize</a>
-            <a href="{% url 'student-edit' pk=student.pk %}">Edit</a>
-            <a href="{% url 'student-delete' pk=student.pk %}" class="delete">Delete</a>
+            <a href="{% url 'student-list' %}">Qaytish</a>
+            <a href="{% url 'student-authorize' pk=student.pk %}">Ruxsat</a>
+            <a href="{% url 'student-edit' pk=student.pk %}">Tahrirlash</a>
+            <a href="{% url 'student-delete' pk=student.pk %}" class="delete">O'chirish</a>
         </div>
     </div>
 </body>

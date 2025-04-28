@@ -145,7 +145,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Authorize Student</h1>
+        <h1>Ruxsat berish</h1>
         <div class="student-details">
             <div class="student-image">
                 <img src="{{ student.image.url }}" alt="{{ student.name }}">
@@ -164,8 +164,8 @@
             <button type="submit">O'zgartirish</button>
         </form>
         <div class="actions">
-            <a href="{% url 'student-list' %}">Back to List</a>
-            <a href="{% url 'student-detail' pk=student.pk %}">View Details</a>
+            <a href="{% url 'student-list' %}">Qaytish</a>
+            <a href="{% url 'student-detail' pk=student.pk %}">Ko'rish</a>
         </div>
     </div>
 </body>

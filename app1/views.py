@@ -321,7 +321,7 @@ def register_student(request):
 
             # Check if the username already exists
             if User.objects.filter(username=username).exists():
-                messages.error(request, 'Username already exists. Please choose another one.')
+                messages.error(request, 'Bu akkaunt allaqachon tizimda mavjud.')
                 return render(request, 'register_student.html')
 
             # Decode the base64 image data

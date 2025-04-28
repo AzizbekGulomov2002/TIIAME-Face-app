@@ -91,8 +91,8 @@
             border-radius: 50%;
             border: 5px solid #007BFF;
             margin-bottom: 20px;
-            width: 150px;
-            height: 150px;
+            width: 250px; /* Increased size */
+            height: 250px; /* Increased size */
             object-fit: cover;
         }
 
@@ -160,8 +160,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/blazeface"></script>
 </head>
 <body>
-
-
     <!-- Main Content Area -->
     <div class="content">
         <a href="/"><button class="toggle-btn" id="toggle-btn">
@@ -219,8 +217,8 @@
             // Capture and send the image to the server
             function captureAndSendImage() {
                 const context = canvas.getContext('2d');
-                canvas.width = video.videoWidth;
-                canvas.height = video.videoHeight;
+                canvas.width = video.videoWidth; // Match canvas to video dimensions
+                canvas.height = video.videoHeight; // Match canvas to video dimensions
                 context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
                 const dataURL = canvas.toDataURL('image/jpeg'); // Get image as Base64

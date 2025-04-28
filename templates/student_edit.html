@@ -97,8 +97,8 @@
             {% csrf_token %}
             {{ form.as_p }}
             <div class="actions">
-                <button type="submit" class="btn btn-primary">Save Changes</button>
-                <a href="{% url 'student-detail' pk=student.pk %}" class="btn btn-secondary">Back to Student Details</a>
+                <button type="submit" class="btn btn-primary">Saqlash</button>
+                <a href="{% url 'student-detail' pk=student.pk %}" class="btn btn-secondary">Qaytish</a>
             </div>
         </form>
     </div>

@@ -82,6 +82,23 @@
         .footer i {
             margin-right: 10px;
         }
+        /* Table footer button */
+        .table-footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .table-footer a {
+            display: inline-block;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #007bff;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .table-footer a:hover {
+            background-color: #0056b3;
+        }
 
         /* Responsive Styles */
         @media only screen and (max-width: 600px) {
@@ -108,8 +125,8 @@
                 <tr>
                     <th>Ism sharif</th>
                     <th>Email</th>
-                    <th>Telefon raqam</th>
                     <th>Guruh</th>
+                    <!-- <th>Guruh</th> -->
                     <th>Ro'yxatda</th>
                     <!-- <th>Sozlama</th> -->
                 </tr>
@@ -120,14 +137,18 @@
                     <td>{{ student.name }}</td>
                     <td>{{ student.email }}</td>
                     <td>{{ student.student_class }}</td>
-                    <td>{% if student.authorized %} Yes {% else %} No {% endif %}</td>
+                    <!-- <td>{% if student.authorized %} Ha {% else %} Yo'q {% endif %}</td> -->
                     <td class="actions">
-                        <a href="{% url 'student-authorize' pk=student.pk %}">View</a>
+                        <a href="{% url 'student-authorize' pk=student.pk %}">Ko'rish</a>
                     </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
+
+        <div class="table-footer">
+            <a href="{% url 'home' %}">Asosiy</a>
+        </div>
     </div>
     <!-- Back to home icon -->
     <div class="footer" onclick="location.href='{% url 'home' %}'">
